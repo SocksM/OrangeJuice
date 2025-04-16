@@ -27,7 +27,7 @@ public class NerdBotApiApp {
     @Getter
     private static AppConfig config;
 
-    public static final Gson GSON = new GsonBuilder() // TODO: check if all adapters are needed (i dont understand gson)
+    public static final Gson GSON = new GsonBuilder() // TODO: check if all adapters are needed (i (socks) dont understand gson)
         .setPrettyPrinting()
         .registerTypeAdapter(UUID.class, new UUIDTypeAdapter())
         .registerTypeAdapter(Instant.class, new InstantTypeAdapter())

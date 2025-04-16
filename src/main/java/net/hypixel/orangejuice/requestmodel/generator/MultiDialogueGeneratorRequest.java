@@ -9,10 +9,10 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MultiDialogueGeneratorRequest extends GeneratorRequestModelBase {
 
-    @Schema(description = "Names of the npcs", example = "TODO") // TODO
+    @Schema(description = "Names of the npcs", example = "TODO") // TODO: example
     private String npcNames;
 
-    @Schema(description = DIALOGUE_DESCRIPTION, example = "TODO") // TODO
+    @Schema(description = DIALOGUE_DESCRIPTION, example = "TODO") // TODO: example
     private String dialogue;
 
     @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE)

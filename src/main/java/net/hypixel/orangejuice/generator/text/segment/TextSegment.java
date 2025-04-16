@@ -95,7 +95,7 @@ public final class TextSegment extends ColorSegment {
             '}';
     }
 
-    public static class Builder implements ClassBuilder<TextSegment> { // TODO: ask aerh where these unused setters are for
+    public static class Builder implements ClassBuilder<TextSegment> { // TODO: ask aerh what these unused setters are for (and if they are needed)
 
         protected String text = "";
         protected ChatFormat color;
