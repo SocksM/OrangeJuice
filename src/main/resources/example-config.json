@@ -1,0 +1,8 @@
+{
+  "metricsConfig": {
+    "enabled": false,
+    "port": 1234
+  },
+  "imageGeneratorTimeoutMs": 3000,
+  "swaggerEnabled": true
+}
