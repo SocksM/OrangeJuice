@@ -7,20 +7,15 @@ import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.metrics.PrometheusMetrics;
 import org.jetbrains.annotations.Nullable;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
