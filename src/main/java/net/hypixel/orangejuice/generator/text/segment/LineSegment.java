@@ -1,7 +1,5 @@
 package net.hypixel.orangejuice.generator.text.segment;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

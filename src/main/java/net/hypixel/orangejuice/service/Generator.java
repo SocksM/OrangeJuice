@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.hypixel.orangejuice.requestmodel.generator.submodels.MultiDialogueLine;
 import net.hypixel.orangejuice.util.model.Pair;
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.data.Rarity;
@@ -293,7 +294,7 @@ public class Generator {
 
     public static GeneratedObject generateSingleDialogue(
         String npcName,
-        String dialogue,
+        String[] dialogue,
         @Nullable Integer maxLineLength,
         @Nullable Boolean abiphone,
         @Nullable String skinValue
@@ -301,26 +302,23 @@ public class Generator {
         abiphone = abiphone != null && abiphone;
         maxLineLength = maxLineLength == null ? 91 : maxLineLength;
 
-        String[] lines = dialogue.split("\\\\n");
-        for (int i = 0; i < lines.length; i++) {
-            lines[i] = "&e[NPC] " + npcName + "&f: " + (abiphone ? "&b%%ABIPHONE%%&f " : "") + lines[i];
-            String line = lines[i];
+        for (int i = 0; i < dialogue.length; i++) {
+            dialogue[i] = "&e[NPC] " + npcName + "&f: " + (abiphone ? "&b%%ABIPHONE%%&f " : "") + dialogue[i];
+            String line = dialogue[i];
 
-            if (line.contains("{options:")) {
+            if (line.contains("{options:")) { // TODO: make a better way to check for options (probably just another json object)
                 String[] split = line.split("\\{options: ?");
-                lines[i] = split[0];
+                dialogue[i] = split[0];
                 String[] options = split[1].replace("}", "").split(", ");
-                lines[i] += "\n&eSelect an option: &f";
+                dialogue[i] += "\n&eSelect an option: &f";
                 for (String option : options) {
-                    lines[i] += "&a" + option + "&f ";
+                    dialogue[i] += "&a" + option + "&f ";
                 }
             }
         }
 
-        dialogue = String.join("\n", lines);
-
         MinecraftTooltipGenerator.Builder tooltipGenerator = new MinecraftTooltipGenerator.Builder()
-            .withItemLore(dialogue)
+            .withItemLore(String.join("\n", dialogue))
             .withAlpha(0)
             .withPadding(MinecraftTooltip.DEFAULT_PADDING)
             .isPaddingFirstLine(false)
@@ -343,8 +341,8 @@ public class Generator {
     }
 
     public static GeneratedObject generateMultiDialogue(
-        String npcNames,
-        String dialogue,
+        String[] npcNames,
+        MultiDialogueLine[] dialogue,
         @Nullable Integer maxLineLength,
         @Nullable Boolean abiphone,
         @Nullable String skinValue
@@ -352,22 +350,14 @@ public class Generator {
         abiphone = abiphone != null && abiphone;
         maxLineLength = maxLineLength == null ? 91 : maxLineLength;
 
-        String[] lines = dialogue.split("\\\\n");
-        String[] names = npcNames.split(", ?");
+        String[] lines = new String[dialogue.length];
 
-        for (int i = 0; i < lines.length; i++) {
-            String[] split = lines[i].split(", ?");
+        for (int i = 0; i < dialogue.length; i++) {
             try {
-                int index = Integer.parseInt(split[0]);
-
-                if (index >= names.length) {
-                    index = names.length - 1;
-                }
-
-                lines[i] = "&e[NPC] " + names[index] + "&f: " + (abiphone ? "&b%%ABIPHONE%%&f " : "") + split[1];
+                lines[i] = "&e[NPC] " + npcNames[dialogue[i].getNpcIndex()] + "&f: " + (abiphone ? "&b%%ABIPHONE%%&f " : "") + dialogue[i].getLine();
                 String line = lines[i];
 
-                if (line.contains("{options:")) {
+                if (line.contains("{options:")) { // TODO: make a better way to check for options (probably just another json object)
                     String[] split2 = line.split("\\{options: ?");
                     lines[i] = split2[0];
                     String[] options = split2[1].replace("}", "").split(", ?");
@@ -377,14 +367,12 @@ public class Generator {
                     }
                 }
             } catch (NumberFormatException exception) {
-                throw new GeneratorException("Invalid NPC name index found in dialogue: " + split[0] + " (line " + (i + 1) + ")");
+                throw new GeneratorException("Invalid NPC name index found in dialogue: " + dialogue[i].getNpcIndex() + " (line " + (i + 1) + ")");
             }
         }
 
-        dialogue = String.join("\n", lines);
-
         MinecraftTooltipGenerator.Builder tooltipGenerator = new MinecraftTooltipGenerator.Builder()
-            .withItemLore(dialogue)
+            .withItemLore(String.join("\n", lines))
             .withAlpha(0)
             .withPadding(MinecraftTooltip.DEFAULT_PADDING)
             .isPaddingFirstLine(false)

@@ -2,7 +2,6 @@ package net.hypixel.orangejuice.generator.text.segment;
 
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import lombok.Setter;
 import net.hypixel.orangejuice.generator.builder.ClassBuilder;
 import net.hypixel.orangejuice.generator.text.ChatFormat;

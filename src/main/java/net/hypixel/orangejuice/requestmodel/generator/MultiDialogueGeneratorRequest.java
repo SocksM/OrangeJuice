@@ -3,17 +3,27 @@ package net.hypixel.orangejuice.requestmodel.generator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import net.hypixel.orangejuice.requestmodel.generator.submodels.MultiDialogueLine;
+import net.hypixel.orangejuice.util.model.Pair;
+
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.ABIPHONE_DESCRIPTION;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.ABIPHONE_EXAMPLE;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.DIALOGUE_DESCRIPTION;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.MAX_LINE_LENGTH_DESCRIPTION;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.MAX_LINE_LENGTH_EXAMPLE;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_DESCRIPTION;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_EXAMPLE;
 
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "Request to generate multi npc dialogue")
 @Data
-public class MultiDialogueGeneratorRequest extends GeneratorRequestModelBase {
+public class MultiDialogueGeneratorRequest {
 
-    @Schema(description = "Names of the npcs", example = "TODO") // TODO: example
-    private String npcNames;
+    @Schema(description = "Names of the npcs", example = "[\"Your best friend\"]")
+    private String[] npcNames;
 
-    @Schema(description = DIALOGUE_DESCRIPTION, example = "TODO") // TODO: example
-    private String dialogue;
+    @Schema(description = DIALOGUE_DESCRIPTION)
+    private MultiDialogueLine[] dialogue;
 
     @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE)
     private int maxLineLength;

@@ -3,14 +3,18 @@ package net.hypixel.orangejuice.requestmodel.generator;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import net.hypixel.orangejuice.requestmodel.generator.submodels.InventoryItem;
+
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.RENDER_BORDER_DESCRIPTION;
+import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.RENDER_BORDER_EXAMPLE;
 
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "Request to generate an inventory")
 @Data
-public class InventoryGeneratorRequest extends GeneratorRequestModelBase {
+public class InventoryGeneratorRequest {
 
-    @Schema(description = "The inventory string to be used for the generation", example = "TODO") // TODO: example
-    private String inventoryString;
+    @Schema(description = "The inventory string to be used for the generation") // TODO: example
+    private InventoryItem[] inventoryItems;
 
     @Schema(description = "The number of rows in the inventory", example = "6")
     private int rows;

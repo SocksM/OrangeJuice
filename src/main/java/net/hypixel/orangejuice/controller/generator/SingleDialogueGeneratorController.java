@@ -28,7 +28,7 @@ public class SingleDialogueGeneratorController {
             return HttpUtil.properApiImageReturn(
                 Generator.generateSingleDialogue(
                     request.getNpcName(),
-                    request.getDialogue(), // TODO: Make this a list of lines instead of a string
+                    request.getDialogue(),
                     request.getMaxLineLength(),
                     request.isAbiphone(),
                     request.getSkinValue()

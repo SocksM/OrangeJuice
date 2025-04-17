@@ -2,6 +2,7 @@ package net.hypixel.orangejuice.controller.generator;
 
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
+import net.hypixel.orangejuice.requestmodel.generator.submodels.InventoryItem;
 import net.hypixel.orangejuice.service.Generator;
 import net.hypixel.orangejuice.util.HttpUtil;
 import net.hypixel.orangejuice.requestmodel.generator.TooltipGeneratorRequest;
@@ -33,16 +34,16 @@ public class TooltipGeneratorController {
                     request.getRarity(),
                     request.getItemId(),
                     request.getSkinValue(),
-                    request.getRecipe(), // TODO: Make this a list of items instead of a string
+                    InventoryItem.toStringFromArray(request.getRecipe()),
                     request.getAlpha(),
                     request.getPadding(),
-                    request.getDisableRarityLineBreak(),
-                    request.getEnchanted(),
-                    request.getCentered(),
-                    request.getPaddingFirstLine(),
+                    request.isDisableRarityLineBreak(),
+                    request.isEnchanted(),
+                    request.isCentered(),
+                    request.isPaddingFirstLine(),
                     request.getMaxLineLength(),
                     request.getTooltipSide(),
-                    request.getRenderBorder()
+                    request.isRenderBorder()
                 )
             );
         } catch (GeneratorException | IOException exception) {
