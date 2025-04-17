@@ -12,14 +12,14 @@ COPY src ./src
 RUN mvn clean install -U -f pom.xml \
     && rm -f /app/target/original-*.jar
 
-# Use a minimal eclipse-temurin image for running the bot
+# Use a minimal eclipse-temurin image for running the api
 FROM eclipse-temurin:24-jdk-alpine
 
 # Set the working directory
 WORKDIR /app
 
 # Copy the built JAR file from the builder stage
-COPY --from=builder /app/target/*.jar /app/NerdBot-Api.jar
+COPY --from=builder /app/target/*.jar /app/OrangeJuice.jar
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar NerdBot-Api.jar"]
+ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar OrangeJuice.jar"]
