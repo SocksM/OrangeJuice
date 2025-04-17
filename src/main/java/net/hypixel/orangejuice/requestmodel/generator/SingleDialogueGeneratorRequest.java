@@ -17,18 +17,18 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_E
 @Data
 public class SingleDialogueGeneratorRequest {
 
-    @Schema(description = "Name of the npc", example = "Your best friend")
+    @Schema(description = "Name of the npc", example = "Your best friend", requiredMode = Schema.RequiredMode.REQUIRED)
     private String npcName;
 
-    @Schema(description = DIALOGUE_DESCRIPTION, example = "[\"Hello there!\",\"How are you doing?\"]")
+    @Schema(description = DIALOGUE_DESCRIPTION, example = "[\"Hello there!\",\"How are you doing?\"]", requiredMode = Schema.RequiredMode.REQUIRED)
     private String[] dialogue;
 
-    @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE)
+    @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int maxLineLength;
 
-    @Schema(description = ABIPHONE_DESCRIPTION, example = ABIPHONE_EXAMPLE)
+    @Schema(description = ABIPHONE_DESCRIPTION, example = ABIPHONE_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean abiphone;
 
-    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE)
+    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String skinValue;
 }

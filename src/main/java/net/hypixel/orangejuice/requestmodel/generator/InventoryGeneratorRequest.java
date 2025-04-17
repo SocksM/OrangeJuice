@@ -13,21 +13,21 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.RENDER_BORDE
 @Data
 public class InventoryGeneratorRequest {
 
-    @Schema(description = "The inventory string to be used for the generation")
+    @Schema(description = "The inventory string to be used for the generation", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private InventoryItem[] inventoryItems;
 
-    @Schema(description = "The number of rows in the inventory", example = "6")
+    @Schema(description = "The number of rows in the inventory", example = "6", requiredMode = Schema.RequiredMode.REQUIRED)
     private int rows;
 
-    @Schema(description = "The number of slots per row in the inventory", example = "9")
+    @Schema(description = "The number of slots per row in the inventory", example = "9", requiredMode = Schema.RequiredMode.REQUIRED)
     private int slotsPerRow;
 
-    @Schema(description = "The hovered item string to be used for the generation", example = "TODO") // TODO: example
+    @Schema(description = "The hovered item string to be used for the generation", example = "TODO", requiredMode = Schema.RequiredMode.NOT_REQUIRED) // TODO: example
     private String hoveredItemString;
 
-    @Schema(description = "The name of the container", example = "My Inventory")
+    @Schema(description = "The name of the container", example = "My Inventory", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String containerName;
 
-    @Schema(description = RENDER_BORDER_DESCRIPTION, example = RENDER_BORDER_EXAMPLE)
+    @Schema(description = RENDER_BORDER_DESCRIPTION, example = RENDER_BORDER_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean renderBorder;
 }

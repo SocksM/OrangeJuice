@@ -9,17 +9,17 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.ITEM_ID_EXAM
 @Data
 public class InventoryItem {
 
-    @Schema(description = "Extra attributes for the item", example = "[\"enchanted\", \"hover\"]")
-    private String[] extraData;
-
-    @Schema(description = ITEM_ID_DESCRIPTION, example = ITEM_ID_EXAMPLE)
+    @Schema(description = ITEM_ID_DESCRIPTION, example = ITEM_ID_EXAMPLE, requiredMode = Schema.RequiredMode.REQUIRED)
     private String itemId;
 
-    @Schema(description = "The amount of the item", example = "3")
+    @Schema(description = "Where the item should be located in the inventory", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
+    private int location;
+
+    @Schema(description = "The amount of the item", example = "3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int amount;
 
-    @Schema(description = "Where the item should be located in the inventory", example = "0")
-    private int location;
+    @Schema(description = "Extra attributes for the item", example = "[\"enchanted\", \"hover\"]", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String[] extraData;
 
     @Override
     public String toString() {

@@ -12,9 +12,9 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.RECIPE_DESCR
 @Data
 public class RecipeGeneratorRequest {
 
-    @Schema(description = RECIPE_DESCRIPTION)
+    @Schema(description = RECIPE_DESCRIPTION, requiredMode = Schema.RequiredMode.REQUIRED)
     private InventoryItem[] recipe;
 
-    @Schema(description = "Whether to render the background", example = "true")
+    @Schema(description = "Whether to render the background", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean renderBackground;
 }

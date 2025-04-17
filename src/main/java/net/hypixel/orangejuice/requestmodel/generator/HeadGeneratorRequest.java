@@ -12,6 +12,6 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_E
 @Data
 public class HeadGeneratorRequest {
 
-    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE)
+    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String skinValue;
 }

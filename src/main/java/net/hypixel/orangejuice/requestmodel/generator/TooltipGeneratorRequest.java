@@ -19,51 +19,51 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_E
 @Schema(description = "Request model for tooltip generation")
 @Data
 public class TooltipGeneratorRequest {
-    @Schema(description = "Item name", example = "Sword of Legends")
+    @Schema(description = "Item name", example = "Sword of Legends", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String itemName;
 
-    @Schema(description = "Item lore", example = "A legendary sword")
+    @Schema(description = "Item lore", example = "A legendary sword", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String itemLore;
 
-    @Schema(description = "Item type", example = "SWORD")
+    @Schema(description = "Item type", example = "SWORD", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String type;
 
-    @Schema(description = "Item rarity", example = "legendary")
+    @Schema(description = "Item rarity", example = "legendary", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String rarity;
 
-    @Schema(description = ITEM_ID_DESCRIPTION, example = ITEM_ID_EXAMPLE)
+    @Schema(description = ITEM_ID_DESCRIPTION, example = ITEM_ID_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String itemId;
 
-    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE)
+    @Schema(description = SKIN_VALUE_DESCRIPTION, example = SKIN_VALUE_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String skinValue;
 
-    @Schema(description = RECIPE_DESCRIPTION)
+    @Schema(description = RECIPE_DESCRIPTION, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private InventoryItem[] recipe;
 
-    @Schema(description = ALPHA_DESCRIPTION, example = ALPHA_EXAMPLE)
+    @Schema(description = ALPHA_DESCRIPTION, example = ALPHA_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int alpha;
 
-    @Schema(description = PADDING_DESCRIPTION, example = PADDING_EXAMPLE)
+    @Schema(description = PADDING_DESCRIPTION, example = PADDING_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int padding;
 
-    @Schema(description = "Disable rarity line break", example = "false")
+    @Schema(description = "Disable rarity line break", example = "false", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean disableRarityLineBreak;
 
-    @Schema(description = "Is enchanted", example = "true")
+    @Schema(description = "Is enchanted", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean enchanted;
 
-    @Schema(description = "Is centered", example = "false")
+    @Schema(description = "Is centered", example = "false", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean centered;
 
-    @Schema(description = "Padding for the first line", example = "true")
+    @Schema(description = "Padding for the first line", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean paddingFirstLine;
 
-    @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE)
+    @Schema(description = MAX_LINE_LENGTH_DESCRIPTION, example = MAX_LINE_LENGTH_EXAMPLE, requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int maxLineLength;
 
-    @Schema(description = "Tooltip side", example = "left")
+    @Schema(description = "Tooltip side", example = "left", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String tooltipSide;
 
-    @Schema(description = "Render border", example = "true")
+    @Schema(description = "Render border", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private boolean renderBorder;
 }
