@@ -10,7 +10,7 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_D
 import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.SKIN_VALUE_EXAMPLE;
 
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "Request to generate a player head")
+@Schema(description = "Request to generate an item display")
 @Data
 public class ItemGeneratorRequest {
 
