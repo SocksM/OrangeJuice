@@ -13,7 +13,7 @@ import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.RENDER_BORDE
 @Data
 public class InventoryGeneratorRequest {
 
-    @Schema(description = "The inventory string to be used for the generation") // TODO: example
+    @Schema(description = "The inventory string to be used for the generation")
     private InventoryItem[] inventoryItems;
 
     @Schema(description = "The number of rows in the inventory", example = "6")
