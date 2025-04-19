@@ -35,12 +35,12 @@ public class SearchController {
         return ResponseEntity.ok(contains(AutoCompleteService.itemRaritiesAutoCompletes(), searchTerm));
     }
 
-    @GetMapping("/tooltipside")
+    @GetMapping("/tooltip-side")
     public ResponseEntity tooltipSide() {
         return ResponseEntity.ok(AutoCompleteService.tooltipSideAutoCompletes());
     }
 
-    @GetMapping("/tooltipside/{searchTerm}")
+    @GetMapping("/tooltip-side/{searchTerm}")
     public ResponseEntity tooltipSide(@PathVariable String searchTerm) {
         return ResponseEntity.ok(contains(AutoCompleteService.tooltipSideAutoCompletes(), searchTerm));
     }
