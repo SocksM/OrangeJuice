@@ -3,7 +3,7 @@ package net.hypixel.orangejuice.controller.generator;
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
 import net.hypixel.orangejuice.requestmodel.generator.submodels.InventoryItem;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.InventoryService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import net.hypixel.orangejuice.requestmodel.generator.InventoryGeneratorRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +27,7 @@ public class InventoryGeneratorController {
     public ResponseEntity generate(@RequestBody InventoryGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateInventory(
+                InventoryService.generate(
                     InventoryItem.toStringFromArray(request.getInventoryItems()), // TODO: this should be done lower down the stack but too lazy to do it now (also dont understand the code fully)
                     request.getRows(),
                     request.getSlotsPerRow(),

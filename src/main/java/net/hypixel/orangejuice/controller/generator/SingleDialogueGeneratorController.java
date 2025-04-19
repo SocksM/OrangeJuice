@@ -2,7 +2,7 @@ package net.hypixel.orangejuice.controller.generator;
 
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.SingleDialogueService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class SingleDialogueGeneratorController {
     public ResponseEntity generate(@RequestBody SingleDialogueGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateSingleDialogue(
+                SingleDialogueService.generate(
                     request.getNpcName(),
                     request.getDialogue(),
                     request.getMaxLineLength(),

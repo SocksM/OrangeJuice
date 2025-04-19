@@ -3,7 +3,7 @@ package net.hypixel.orangejuice.controller.generator;
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
 import net.hypixel.orangejuice.requestmodel.generator.submodels.InventoryItem;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.RecipeService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class RecipeGeneratorController {
     public ResponseEntity generate(@RequestBody RecipeGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateRecipe(
+                RecipeService.generate(
                     InventoryItem.toStringFromArray(request.getRecipe()),
                     request.isRenderBackground()
                 )

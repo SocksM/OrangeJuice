@@ -7,7 +7,7 @@ import net.hypixel.orangejuice.generator.spritesheet.Spritesheet;
 import java.util.Arrays;
 import java.util.List;
 
-public class AutoComplete {
+public class AutoCompleteService {
     public static List<String> itemNamesAutoCompletes() {
         return Spritesheet.getImageMap().keySet()
             .stream()

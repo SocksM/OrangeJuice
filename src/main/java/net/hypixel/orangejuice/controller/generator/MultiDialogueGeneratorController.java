@@ -2,7 +2,7 @@ package net.hypixel.orangejuice.controller.generator;
 
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.MultiDialogueService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class MultiDialogueGeneratorController {
     public ResponseEntity generate(@RequestBody MultiDialogueGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateMultiDialogue(
+                MultiDialogueService.generate(
                     request.getNpcNames(),
                     request.getDialogue(), // TODO: Make this a list of lines instead of a string
                     request.getMaxLineLength(),

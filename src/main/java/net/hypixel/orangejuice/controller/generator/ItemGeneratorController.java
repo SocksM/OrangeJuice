@@ -3,7 +3,7 @@ package net.hypixel.orangejuice.controller.generator;
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
 import net.hypixel.orangejuice.requestmodel.generator.ItemGeneratorRequest;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.ItemService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class ItemGeneratorController {
     public ResponseEntity generate(@RequestBody ItemGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateItem(
+                ItemService.generate(
                     request.getItemId(),
                     request.getData(),
                     request.isEnchanted(),

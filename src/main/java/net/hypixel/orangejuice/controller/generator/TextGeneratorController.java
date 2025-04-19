@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.TextService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class TextGeneratorController {
     public ResponseEntity generate(@RequestBody TextGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateText(
+                TextService.generate(
                     request.getText(),
                     request.getCentered(),
                     request.getAlpha(),

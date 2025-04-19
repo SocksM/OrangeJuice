@@ -2,7 +2,7 @@ package net.hypixel.orangejuice.controller.generator;
 
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.generator.HeadService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,7 @@ public class HeadGeneratorController {
     public ResponseEntity generate(@RequestBody HeadGeneratorRequest request) {
         try {
             return HttpUtil.properApiImageReturn(
-                Generator.generateHead(request.getSkinValue())
+                HeadService.generate(request.getSkinValue())
             );
         } catch (GeneratorException | IOException exception) {
             log.error("Encountered an error while generating the image", exception);

@@ -2,7 +2,7 @@ package net.hypixel.orangejuice.controller;
 
 import lombok.extern.log4j.Log4j2;
 import net.hypixel.orangejuice.generator.exception.GeneratorException;
-import net.hypixel.orangejuice.service.Generator;
+import net.hypixel.orangejuice.service.NbtService;
 import net.hypixel.orangejuice.util.HttpUtil;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class NbtParseController {
         @RequestParam(required = false) @Nullable Integer padding
     ) {
         try {
-            return HttpUtil.properApiImageReturn(Generator.parseNbtString(nbt, alpha, padding).value1());
+            return HttpUtil.properApiImageReturn(NbtService.parseNbtString(nbt, alpha, padding).value1());
         } catch (GeneratorException | IOException exception) {
             log.error("Encountered an error while generating the image", exception);
             return ResponseEntity.status(500).body("An error occurred during image generation: " + exception.getCause());
