@@ -43,10 +43,6 @@ public class InventoryItem {
             return "";
         }
 
-        if (items.length == 1) {
-            return items[0].toString();
-        }
-
         StringBuilder result = new StringBuilder();
         result.append(items[0].toString());
         for (int i = 1; i < items.length; i++) {
