@@ -46,5 +46,4 @@ public class InventoryService {
 
         return generatedObject.build();
     }
-    }
 }
