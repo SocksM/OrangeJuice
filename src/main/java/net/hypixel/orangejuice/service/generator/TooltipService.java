@@ -8,6 +8,7 @@ import net.hypixel.orangejuice.generator.impl.MinecraftItemGenerator;
 import net.hypixel.orangejuice.generator.impl.MinecraftPlayerHeadGenerator;
 import net.hypixel.orangejuice.generator.impl.tooltip.MinecraftTooltipGenerator;
 import net.hypixel.orangejuice.generator.item.GeneratedObject;
+import net.hypixel.orangejuice.util.Util;
 import org.jetbrains.annotations.Nullable;
 
 public class TooltipService {
@@ -75,7 +76,7 @@ public class TooltipService {
             }
         }
 
-        if (recipe != null) {
+        if (!Util.isNullOrBlank(recipe)) {
             generatorImageBuilder.addGenerator(0, new MinecraftInventoryGenerator.Builder()
                 .withRows(3)
                 .withSlotsPerRow(3)
