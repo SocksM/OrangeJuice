@@ -40,7 +40,7 @@ public class InventoryItem {
 
     public static String toStringFromArray(InventoryItem[] items) {
         if (items == null || items.length == 0) {
-            return null;
+            return "";
         }
 
         if (items.length == 1) {
