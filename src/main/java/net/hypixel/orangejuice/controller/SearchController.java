@@ -15,12 +15,12 @@ import java.util.List;
 @RequestMapping("/search")
 public class SearchController {
 
-    @GetMapping("/itemid")
+    @GetMapping("/item-id")
     public ResponseEntity itemIds() {
         return ResponseEntity.ok(AutoCompleteService.itemNamesAutoCompletes());
     }
 
-    @GetMapping("/itemid/{searchTerm}")
+    @GetMapping("/item-id/{searchTerm}")
     public ResponseEntity itemIds(@PathVariable String searchTerm) {
         return ResponseEntity.ok(contains(AutoCompleteService.itemNamesAutoCompletes(), searchTerm));
     }
