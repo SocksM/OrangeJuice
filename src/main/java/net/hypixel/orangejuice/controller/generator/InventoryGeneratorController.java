@@ -30,7 +30,7 @@ public class InventoryGeneratorController {
                 InventoryService.generate(
                     InventoryItem.toStringFromArray(request.getInventoryItems()), // TODO: this should be done lower down the stack but too lazy to do it now (also dont understand the code fully)
                     request.getRows(),
-                    request.getSlotsPerRow(),
+                    request.getColumns(),
                     request.getHoveredItemString(),
                     request.getContainerName(),
                     request.isRenderBorder()

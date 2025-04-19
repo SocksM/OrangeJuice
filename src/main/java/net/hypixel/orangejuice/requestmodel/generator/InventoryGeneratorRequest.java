@@ -20,9 +20,9 @@ public class InventoryGeneratorRequest {
     private int rows;
 
     @Schema(description = "The number of slots per row in the inventory", example = "9", requiredMode = Schema.RequiredMode.REQUIRED)
-    private int slotsPerRow;
+    private int columns;
 
-    @Schema(description = "The hovered item string to be used for the generation", example = "TODO", requiredMode = Schema.RequiredMode.NOT_REQUIRED) // TODO: example
+    @Schema(description = "The hovered item string to be used for the generation", example = "Insane inventory item description!!!!!", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private String hoveredItemString;
 
     @Schema(description = "The name of the container", example = "My Inventory", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
