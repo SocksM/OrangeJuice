@@ -13,7 +13,7 @@ public class InventoryItem {
     private String itemId;
 
     @Schema(description = "Where the item should be located in the inventory", example = "0", requiredMode = Schema.RequiredMode.REQUIRED)
-    private int location;
+    private int[] location; // TODO: think about changing this to a pair
 
     @Schema(description = "The amount of the item", example = "3", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private int amount;
@@ -29,7 +29,13 @@ public class InventoryItem {
             result.append(",").append(extra);
         }
 
-        result.append(":[").append(location).append("]");
+        if (location.length == 1) {
+            result.append(":[").append(location[0]).append("]");
+        } else if (location.length == 2) {
+            result.append(":[").append(location[0]).append("-").append(location[1]).append("]");
+        } else {
+            throw new IllegalArgumentException("Invalid location: " + location);
+        }
 
         if (amount > 0) { // Only appended when an input is given (default int in java is 0)
             result.append(":").append(amount);
