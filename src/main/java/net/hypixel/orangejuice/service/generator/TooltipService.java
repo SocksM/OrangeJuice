@@ -57,7 +57,7 @@ public class TooltipService {
             .withRenderBorder(renderBorder)
             .build();
 
-        if (itemId != null) {
+        if (!Util.isNullOrBlank(itemId)) {
             if (itemId.equalsIgnoreCase("player_head")) {
                 MinecraftPlayerHeadGenerator.Builder generator = new MinecraftPlayerHeadGenerator.Builder()
                     .withScale(-2);
