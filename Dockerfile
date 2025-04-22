@@ -22,4 +22,4 @@ WORKDIR /app
 COPY --from=builder /app/target/*.jar /app/OrangeJuice.jar
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "exec java ${JAVA_OPTS} -jar OrangeJuice.jar"]
+ENTRYPOINT ["sh", "-c", "exec java -Xms256m -Xmx1g ${JAVA_OPTS} -jar OrangeJuice.jar"]
