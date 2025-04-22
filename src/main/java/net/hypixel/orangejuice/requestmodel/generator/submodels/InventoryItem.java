@@ -2,6 +2,7 @@ package net.hypixel.orangejuice.requestmodel.generator.submodels;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import net.hypixel.orangejuice.util.Util;
 
 import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.ITEM_ID_DESCRIPTION;
 import static net.hypixel.orangejuice.requestmodel.ApiDocsConstants.ITEM_ID_EXAMPLE;
@@ -25,20 +26,27 @@ public class InventoryItem {
     public String toString() {
         StringBuilder result = new StringBuilder(itemId);
 
-        for (String extra : extraData) {
-            result.append(",").append(extra);
+        if (extraData != null) {
+            for (String data : extraData) {
+                if (!Util.isNullOrBlank(data)) {
+                    result.append(data).append(',');
+                }
+            }
+            if (result.charAt(result.length() - 1) == ',') {
+                result.deleteCharAt(result.length() - 1);
+            }
         }
 
         if (location.length == 1) {
-            result.append(":[").append(location[0]).append("]");
+            result.append(":[").append(location[0]).append(']');
         } else if (location.length == 2) {
-            result.append(":[").append(location[0]).append("-").append(location[1]).append("]");
+            result.append(":[").append(location[0]).append('-').append(location[1]).append(']');
         } else {
             throw new IllegalArgumentException("Invalid location: " + location);
         }
 
-        if (amount > 0) { // Only appended when an input is given (default int in java is 0)
-            result.append(":").append(amount);
+        if (amount > 0) { // Only appended when an input is given (default int in java is 0) (doesn't reeeaaaly matter but just gives me piece of mind)
+            result.append(':').append(amount);
         }
 
         return result.toString();
