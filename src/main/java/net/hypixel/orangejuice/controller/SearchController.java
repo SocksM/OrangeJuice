@@ -17,32 +17,62 @@ public class SearchController {
 
     @GetMapping("/item-id")
     public ResponseEntity itemIds() {
-        return ResponseEntity.ok(AutoCompleteService.itemNamesAutoCompletes());
+        try {
+            return ResponseEntity.ok(AutoCompleteService.itemNamesAutoCompletes());
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting item ids", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     @GetMapping("/item-id/{searchTerm}")
     public ResponseEntity itemIds(@PathVariable String searchTerm) {
-        return ResponseEntity.ok(contains(AutoCompleteService.itemNamesAutoCompletes(), searchTerm));
+        try {
+            return ResponseEntity.ok(contains(AutoCompleteService.itemNamesAutoCompletes(), searchTerm));
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting item ids", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     @GetMapping("/rarity")
     public ResponseEntity itemRarities() {
-        return ResponseEntity.ok(AutoCompleteService.itemRaritiesAutoCompletes());
+        try {
+            return ResponseEntity.ok(AutoCompleteService.itemRaritiesAutoCompletes());
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting rarities", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     @GetMapping("/rarity/{searchTerm}")
     public ResponseEntity itemRarities(@PathVariable String searchTerm) {
-        return ResponseEntity.ok(contains(AutoCompleteService.itemRaritiesAutoCompletes(), searchTerm));
+        try {
+            return ResponseEntity.ok(contains(AutoCompleteService.itemRaritiesAutoCompletes(), searchTerm));
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting rarities", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     @GetMapping("/tooltip-side")
     public ResponseEntity tooltipSide() {
-        return ResponseEntity.ok(AutoCompleteService.tooltipSideAutoCompletes());
+        try {
+            return ResponseEntity.ok(AutoCompleteService.tooltipSideAutoCompletes());
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting tooltip sides", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     @GetMapping("/tooltip-side/{searchTerm}")
     public ResponseEntity tooltipSide(@PathVariable String searchTerm) {
-        return ResponseEntity.ok(contains(AutoCompleteService.tooltipSideAutoCompletes(), searchTerm));
+        try {
+            return ResponseEntity.ok(contains(AutoCompleteService.tooltipSideAutoCompletes(), searchTerm));
+        } catch (Exception exception) {
+            log.error("Encountered an error while getting tooltip sides", exception);
+            return ResponseEntity.status(500).body("An error occurred while processing the request" + exception.getCause());
+        }
     }
 
     private static List<String> contains(List<String> set, String searchTerm) {
