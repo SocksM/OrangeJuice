@@ -44,6 +44,10 @@ public class Stat {
             .orElse(null);
     }
 
+    public static List<Stat> getStats() {
+        return STATS;
+    }
+
     /**
      * In some cases, stats can have multiple colors.
      * One for the number and another for the stat

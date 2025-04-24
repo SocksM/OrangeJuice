@@ -31,6 +31,10 @@ public class Icon {
     private String name;
     private String icon;
 
+    public static List<Icon> getIcons() {
+        return ICONS;
+    }
+
     public static Icon byName(String name) {
         return ICONS.stream()
             .filter(icon -> icon.getName().equalsIgnoreCase(name))

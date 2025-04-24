@@ -36,6 +36,10 @@ public class Gemstone {
     private Color color;
     private Map<String, String> formattedTiers;
 
+    public static List<Gemstone> getGemstones() {
+        return GEMSTONES;
+    }
+
     public static Gemstone byName(String name) {
         return GEMSTONES.stream()
             .filter(gemstone -> gemstone.getName().equalsIgnoreCase(name))
