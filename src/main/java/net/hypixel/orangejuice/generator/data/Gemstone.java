@@ -1,5 +1,6 @@
 package net.hypixel.orangejuice.generator.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +34,7 @@ public class Gemstone {
     private String name;
     private String icon;
     private String formattedIcon;
+    @JsonIgnore
     private Color color;
     private Map<String, String> formattedTiers;
 
