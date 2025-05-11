@@ -1,0 +1,107 @@
+# Usage:
+# - If the build is successful, it packages the application into a Docker container.
+# - The container is pushed to GHCR and deployed to the vps.
+
+# Requirements:
+# - These secrets must be set up in the repository settings:
+#   - SSH_PRIVATE_KEY: Private SSH key for accessing the vps
+#   - KEY_STORE_PASS: Password for the keystore
+# - These variables must be set up in the repository settings:
+#   - SSH_USER: The SSH username for the vps
+#   - SSH_HOST: The SSH host (IP or domain) of the vps
+
+name: Publish to VPS
+
+on:
+  workflow_dispatch:
+    inputs:
+      outerPort:
+        description: 'Outer port:'
+        required: true
+        type: number
+      useOldImage:
+        description: 'Use old Docker image'
+        required: true
+        default: false
+        type: boolean
+      environmentType:
+        description: 'Environment type (for image/container name):'
+        type: string
+      pathToSSLCertificate:
+        description: 'Path to SSL certificate folder:'
+        type: string
+      pathToConfigFile:
+        description: 'Path to Config file:'
+        type: string
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/orangejuice-${{ github.event.inputs.environmentType || 'PRODUCTION' }}-${{ github.ref_name }}
+  CONTAINER_NAME: orangejuice-${{ github.event.inputs.environmentType || 'PRODUCTION' }}-${{ github.ref_name }}
+  OUTER_PORT: ${{ github.event.inputs.outerPort || '8080' }}
+  USE_OLD_IMAGE: ${{ github.event.inputs.useOldImage || 'false' }}
+  PATH_TO_SSL_CERTIFICATE: ${{ github.event.inputs.pathToSSLCertificate || vars.PATH_TO_SSL_CERTIFICATE }}
+  PATH_TO_CONFIG_FILE: ${{ github.event.inputs.pathToConfigFile || vars.PATH_TO_CONFIG_FILE }}
+
+jobs:
+  publish:
+    name: Publish image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        if: ${{ env.USE_OLD_IMAGE == 'false' }}
+        uses: actions/checkout@v4.2.2
+
+      - name: Login to GHCR
+        if: ${{ env.USE_OLD_IMAGE == 'false' }}
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push Docker image
+        if: ${{ env.USE_OLD_IMAGE == 'false' }}
+        run: |
+          docker build . --tag ${{ env.REGISTRY }}/$(echo "${{ env.IMAGE_NAME }}:latest" | tr '[:upper:]' '[:lower:]') \
+            --build-arg ENV_FILE=.env
+          docker push ${{ env.REGISTRY }}/$(echo "${{ env.IMAGE_NAME }}:latest" | tr '[:upper:]' '[:lower:]')
+
+  deploy:
+    needs: publish
+    name: Deploy image
+    runs-on: ubuntu-latest
+    environment: SSHKey
+
+    steps:
+      - name: Install SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ vars.SSH_HOST }} > ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} << 'EOF'
+          echo "${{ secrets.GITHUB_TOKEN }}" | sudo docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+          sudo docker pull ${{ env.REGISTRY }}/$(echo "${{ env.IMAGE_NAME }}:latest" | tr '[:upper:]' '[:lower:]')
+          sudo docker stop $(echo "${{ env.CONTAINER_NAME }}" | tr '[:upper:]' '[:lower:]' | tr '/' '-') || true
+          sudo docker rm $(echo "${{ env.CONTAINER_NAME }}" | tr '[:upper:]' '[:lower:]' | tr '/' '-') || true
+          sudo docker rmi $(sudo docker images $(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]') -q) -f || true
+          sudo docker run -d \
+            --name $(echo "${{ env.CONTAINER_NAME }}" | tr '[:upper:]' '[:lower:]' | tr '/' '-') \
+            --restart unless-stopped \
+            -v ${{ env.PATH_TO_SSL_CERTIFICATE }}/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro \
+            -v ${{ env.PATH_TO_SSL_CERTIFICATE }}/privkey.pem:/etc/ssl/certs/privkey.pem:ro \
+            -v ${{ env.PATH_TO_SSL_CERTIFICATE }}/chain.pem:/etc/ssl/certs/chain.pem:ro \
+            -v ${{ env.PATH_TO_CONFIG_FILE }}:/app/dev.config.json:ro \
+            -e JAVA_OPTS="-Dserver.ssl.key-store-password=${{ secrets.KEY_STORE_PASS }}" \
+            -p ${{ env.OUTER_PORT }}:8080 \
+            ${{ env.REGISTRY }}/$(echo "${{ env.IMAGE_NAME }}:latest" | tr '[:upper:]' '[:lower:]')
+          EOF
+
+      - name: Cleanup SSH keys
+        run: rm -rf ~/.ssh
